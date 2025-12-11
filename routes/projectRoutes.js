@@ -158,6 +158,9 @@ projectRouter.delete("/:projectId", async (req, res) => {
 
     const removeProject = await Project.findByIdAndDelete(projectId)
 
+    // remove Tasks
+    const removeTasks = await Task.deleteMany({ project: projectId })
+
     res.json(`Removed project: ${removeProject.name}`)
 
   } catch (error) {
